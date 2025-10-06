@@ -14,8 +14,8 @@ RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y, floa
   RouteModel::Node start_node = m_Model.FindClosestNode(start_x, start_y);
   RouteModel::Node end_node = m_Model.FindClosestNode(end_x, end_y);
 
-  RoutePlanner::start_node  = &start_node;
-  RoutePlanner::end_node  = &end_node;
+  RoutePlanner::start_node  = & start_node;
+  RoutePlanner::end_node  = & end_node;
 }
 
 
@@ -42,6 +42,18 @@ float RoutePlanner::CalculateHValue(RouteModel::Node const *node) {
 
 void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) {
 
+  current_node->FindNeighbors();
+  for (RouteModel::Node *neighbor : current_node->neighbors) {
+    neighbor->parent = current_node;
+    neighbor->h_value = RoutePlanner::CalculateHValue(neighbor);
+    neighbor->g_value = neighbor->parent->h_value - neighbor->h_value;
+    neighbor->visited = true;
+    RoutePlanner::open_list.push_back(neighbor);
+
+  
+  }
+
+  
 }
 
 
