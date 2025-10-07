@@ -2,6 +2,7 @@
 #include "route_model.h"
 #include <algorithm>
 #include <cstddef>
+#include <iostream>
 
 RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y,
                            float end_x, float end_y)
@@ -116,8 +117,7 @@ RoutePlanner::ConstructFinalPath(RouteModel::Node *current_node) {
     parent = child->parent;
   }
   // handle start_node
-    distance += parent->distance(*child);
-    path_found.insert(path_found.begin(),*parent);
+    path_found.insert(path_found.begin(),*child);
 
   distance *= m_Model.MetricScale(); // Multiply the distance by the scale of
                                      // the map to get meters.
