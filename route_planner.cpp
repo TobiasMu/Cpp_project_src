@@ -111,7 +111,7 @@ RoutePlanner::ConstructFinalPath(RouteModel::Node *current_node) {
   auto child = current_node;
   while (parent != nullptr) {
     distance += parent->distance(*child);
-    path_found.push_back(*child);
+    path_found.insert(path_found.begin(),*child);
     child = parent;
     parent = child->parent;
   }
