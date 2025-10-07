@@ -49,11 +49,7 @@ void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) {
     neighbor->g_value = current_node->g_value + current_node->distance(*neighbor);
     neighbor->visited = true;
     RoutePlanner::open_list.push_back(neighbor);
-
-  
   }
-
-  
 }
 
 
@@ -65,6 +61,27 @@ void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) {
 // - Return the pointer.
 
 RouteModel::Node *RoutePlanner::NextNode() {
+
+  
+ auto &list = RoutePlanner::open_list;
+
+  int length = list.size();
+  for (int i=0; i<length-1; i++) {
+    RouteModel::Node *node = list[i];
+    RouteModel::Node *next_node = list[i+1];
+    float sum = node->h_value + node->h_value;
+    float nsum = next_node->h_value + next_node->h_value;
+    if (sum < nsum) {
+      RouteModel::Node *temp = list[i];
+      list[i] = list[i+1];
+      list[i+1] = temp;
+      i=-1;
+    }
+  }
+  int idx = list.size();
+  RouteModel::Node *abc = list[idx];
+ list.pop_back();
+  return abc;
 
 }
 
