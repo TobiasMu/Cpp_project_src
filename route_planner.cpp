@@ -115,6 +115,10 @@ RoutePlanner::ConstructFinalPath(RouteModel::Node *current_node) {
     child = parent;
     parent = child->parent;
   }
+  // handle start_node
+    distance += parent->distance(*child);
+    path_found.insert(path_found.begin(),*parent);
+
   distance *= m_Model.MetricScale(); // Multiply the distance by the scale of
                                      // the map to get meters.
   return path_found;
