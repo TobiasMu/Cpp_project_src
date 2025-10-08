@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <cstddef>
 #include <iostream>
+#include <iterator>
+#include <vector>
 
 RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y,
                            float end_x, float end_y)
@@ -135,7 +137,25 @@ RoutePlanner::ConstructFinalPath(RouteModel::Node *current_node) {
 // This path will then be displayed on the map tile.
 
 void RoutePlanner::AStarSearch() {
+
   RouteModel::Node *current_node = nullptr;
 
   // TODO: Implement your solution here.
-}
+  current_node = RoutePlanner::start_node;
+  RoutePlanner::CalculateHValue(current_node);
+  current_node->visited = true;
+  RoutePlanner::open_list.push_back(current_node);
+
+  while (RoutePlanner::open_list.size() > 0) {
+    current_node =RoutePlanner::NextNode();
+    if (current_node->x ==RoutePlanner::end_node->x and current_node->y==RoutePlanner::end_node->y) {
+      m_Model.path = RoutePlanner::ConstructFinalPath(current_node);
+      return;
+    }
+    AddNeighbors(current_node);
+    }
+
+  // if no path found return empty path
+  m_Model.path = std::vector<RouteModel::Node>{};
+
+  }
