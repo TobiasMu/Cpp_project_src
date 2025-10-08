@@ -34,7 +34,7 @@ RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y,
 float RoutePlanner::CalculateHValue(RouteModel::Node const *node) {
   // node -> distance is to call methods on a pointer object
   //
-  float result = node->distance(*RoutePlanner::end_node);
+  float result = node->distance(*end_node);
   return result;
 }
 
@@ -74,7 +74,7 @@ void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) {
 
 RouteModel::Node *RoutePlanner::NextNode() {
 
-  auto &list = RoutePlanner::open_list;
+  auto &list = open_list;
 
   int length = list.size();
   for (int i = 0; i < length - 1; i++) {
