@@ -141,15 +141,15 @@ void RoutePlanner::AStarSearch() {
   RouteModel::Node *current_node = nullptr;
 
   // TODO: Implement your solution here.
-  current_node = RoutePlanner::start_node;
-  current_node->h_value = RoutePlanner::CalculateHValue(current_node);
+  current_node = start_node;
+  current_node->h_value = CalculateHValue(current_node);
   current_node->visited = true;
-  RoutePlanner::open_list.push_back(current_node);
+  open_list.push_back(current_node);
 
-  while (RoutePlanner::open_list.size() > 0) {
-    current_node =RoutePlanner::NextNode();
-    if (current_node->x ==RoutePlanner::end_node->x && current_node->y==RoutePlanner::end_node->y) {
-      m_Model.path = RoutePlanner::ConstructFinalPath(current_node);
+  while (open_list.size() > 0) {
+    current_node =NextNode();
+    if (current_node->x ==end_node->x && current_node->y==end_node->y) {
+      m_Model.path = ConstructFinalPath(current_node);
       return;
     }
     AddNeighbors(current_node);
