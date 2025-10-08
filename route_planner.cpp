@@ -166,7 +166,7 @@ void RoutePlanner::AStarSearch() {
     }
     AddNeighbors(current_node);
 
-    std::cout << open_list.size() << "\n";
+    // std::cout << open_list.size() << "\n";
   }
 
   // if no path found return empty path
