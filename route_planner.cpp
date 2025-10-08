@@ -141,11 +141,17 @@ RoutePlanner::ConstructFinalPath(RouteModel::Node *current_node) {
 // This path will then be displayed on the map tile.
 
 void RoutePlanner::AStarSearch() {
-
+// Check for valid start and end nodes
+    if (!start_node || !end_node) {
+        std::cout << "Invalid start_node or end_node\n";
+        m_Model.path = std::vector<RouteModel::Node*>{};
+        return;
+    }
   RouteModel::Node *current_node = nullptr;
 
   // TODO: Implement your solution here.
   current_node = start_node;
+
   current_node->h_value = CalculateHValue(current_node);
   current_node->visited = true;
   open_list.push_back(current_node);
