@@ -51,6 +51,7 @@ float RoutePlanner::CalculateHValue(RouteModel::Node const *node) {
 void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) {
 
   current_node->FindNeighbors();
+  std::cout << "are we even here? \n";
   if (current_node->neighbors.empty()) {
       std::cout << "No neighbors found for node at (" << current_node->x << ", " << current_node->y << ")\n";
   }
