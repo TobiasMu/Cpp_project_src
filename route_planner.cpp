@@ -144,7 +144,6 @@ void RoutePlanner::AStarSearch() {
 // Check for valid start and end nodes
     if (!start_node || !end_node) {
         std::cout << "Invalid start_node or end_node\n";
-        m_Model.path = std::vector<RouteModel::Node*>{};
         return;
     }
   RouteModel::Node *current_node = nullptr;
