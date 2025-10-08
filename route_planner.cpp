@@ -20,6 +20,8 @@ RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y,
   // RoutePlanner's start_node and end_node attributes.
   RouteModel::Node *start_node = &m_Model.FindClosestNode(start_x, start_y);
   RouteModel::Node *end_node = &m_Model.FindClosestNode(end_x, end_y);
+  RoutePlanner::start_node = start_node;
+  RoutePlanner::end_node = end_node;
 
 }
 
