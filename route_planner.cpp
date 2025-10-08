@@ -80,8 +80,8 @@ RouteModel::Node *RoutePlanner::NextNode() {
   for (int i = 0; i < length - 1; i++) {
     RouteModel::Node *node = list[i];
     RouteModel::Node *next_node = list[i + 1];
-    float sum = node->h_value + node->h_value;
-    float nsum = next_node->h_value + next_node->h_value;
+    float sum = node->h_value + node->g_value;
+    float nsum = next_node->h_value + next_node->g_value;
     if (sum < nsum) {
       RouteModel::Node *temp = list[i];
       list[i] = list[i + 1];
@@ -89,8 +89,7 @@ RouteModel::Node *RoutePlanner::NextNode() {
       i = -1;
     }
   }
-  int idx = list.size();
-  RouteModel::Node *abc = list[idx];
+  RouteModel::Node *abc = list.back();
   list.pop_back();
   return abc;
 }
