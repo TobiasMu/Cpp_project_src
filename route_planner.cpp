@@ -153,6 +153,7 @@ void RoutePlanner::AStarSearch() {
     std::cout << open_list.size() << "\n";
     if (current_node == end_node) {
       m_Model.path = ConstructFinalPath(current_node);
+      std::cout << "success!! \n";
       return;
     }
     AddNeighbors(current_node);
