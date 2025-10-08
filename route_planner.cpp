@@ -142,13 +142,13 @@ void RoutePlanner::AStarSearch() {
 
   // TODO: Implement your solution here.
   current_node = RoutePlanner::start_node;
-  RoutePlanner::CalculateHValue(current_node);
+  current_node->h_value = RoutePlanner::CalculateHValue(current_node);
   current_node->visited = true;
   RoutePlanner::open_list.push_back(current_node);
 
   while (RoutePlanner::open_list.size() > 0) {
     current_node =RoutePlanner::NextNode();
-    if (current_node->x ==RoutePlanner::end_node->x and current_node->y==RoutePlanner::end_node->y) {
+    if (current_node->x ==RoutePlanner::end_node->x && current_node->y==RoutePlanner::end_node->y) {
       m_Model.path = RoutePlanner::ConstructFinalPath(current_node);
       return;
     }
